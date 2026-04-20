@@ -2485,6 +2485,15 @@ abstract class elFinderVolumeDriver
         }
 
         if (!$this->allowPutMime($mime) || ($mimeByName && !$this->allowPutMime($mimeByName))) {
+             // Log upload blocked event for debugging purposes
+             error_log(
+                'elFinder upload blocked. '
+                . 'mime=' . $mime
+                . ', mimeByName=' . $mimeByName
+                . ', uploadAllow=' . json_encode($this->uploadAllow)
+                . ', uploadDeny=' . json_encode($this->uploadDeny)
+            );
+
             return $this->setError(elFinder::ERROR_UPLOAD_FILE_MIME, '(' . $mime . ')');
         }
 
@@ -3331,7 +3340,7 @@ abstract class elFinderVolumeDriver
             }
         }
         if (empty($file['url']) && $this->URL) {
-            $path = str_replace($this->separator, '/', substr($this->decode($hash), strlen(trim($this->root, '/' . $this->separator))));
+            $path = str_replace($this->separator, '/', substr($this->decode($hash), strlen(rtrim($this->root, '/' . $this->separator)) + 1));
             if ($this->encoding) {
                 $path = $this->convEncIn($path, true);
             }
@@ -5481,6 +5490,17 @@ abstract class elFinderVolumeDriver
             return $this->setError(elFinder::ERROR_LOCKED, $this->path($stat['hash']));
         }
 
+        // Symlink to a directory is reported as mime "directory"; unlink the link only (Filester/elFinder fix).
+        $localPath = $this->convEncIn($path);
+        if (is_link($localPath)) {
+            if ($this->convEncOut(!$this->_unlink($localPath))) {
+                return $this->setError(elFinder::ERROR_RM, $this->path($stat['hash']));
+            }
+            $this->clearstatcache();
+            $this->removed[] = $stat;
+            return true;
+        }
+
         if ($stat['mime'] == 'directory' && empty($stat['thash'])) {
             $ret = $this->delTree($this->convEncIn($path));
             $this->convEncOut();
@@ -7131,6 +7151,11 @@ abstract class elFinderVolumeDriver
      */
     protected static function localRmdirRecursive($dir)
     {
+        // Unlink symlink only; BSD/macOS `rm -rf` on a symlink can delete the target tree (Filester fix).
+        if (is_link($dir)) {
+            return unlink($dir);
+        }
+
         // try system command
         if (is_callable('exec')) {
             $o = '';
