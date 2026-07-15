@@ -4,7 +4,7 @@ Donate link: https://ninjateam.org/filester-file-manager-pro/
 Tags: file manager, wordpress file manager, wp file manager, ftp, download plugin
 Requires at least: 3.0
 Tested up to: 7.0
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,7 +109,6 @@ To manage WordPress media library or download entire media folders with your org
 You can [create a new public topic](https://wordpress.org/support/plugin/filester/#new-topic-0), and we'll come back shortly for a quick fix.
 Otherwise, feel free to [chat or email us](https://ninjateam.org/support/).
 
-
 == Screenshots ==
 1. WP file manager for WordPress directory
 2. Filester general settings
@@ -117,6 +116,9 @@ Otherwise, feel free to [chat or email us](https://ninjateam.org/support/).
 4. Top free file manager plugins comparison chart
 
 == Changelog ==
+
+= Jul 15, 2026 - Version 2.1.2 =
+- Fixed: Private-folder fail-open issue.
 
 = May 23, 2026 - Version 2.1.1 =
 - Fixed: OS command injection issue
