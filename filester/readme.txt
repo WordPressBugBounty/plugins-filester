@@ -3,8 +3,8 @@ Contributors: ninjateam
 Donate link: https://ninjateam.org/filester-file-manager-pro/
 Tags: file manager, wordpress file manager, wp file manager, ftp, download plugin
 Requires at least: 3.0
-Tested up to: 7.0
-Stable tag: 2.1.2
+Tested up to: 7.1
+Stable tag: 2.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -116,6 +116,9 @@ Otherwise, feel free to [chat or email us](https://ninjateam.org/support/).
 4. Top free file manager plugins comparison chart
 
 == Changelog ==
+
+= Sep 7, 2026 - Version 2.1.3 =
+- Fixed: Issue with origin check bypass in the file browser
 
 = Jul 15, 2026 - Version 2.1.2 =
 - Fixed: Private-folder fail-open issue.
