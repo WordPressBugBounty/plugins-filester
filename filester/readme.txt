@@ -4,7 +4,7 @@ Donate link: https://ninjateam.org/filester-file-manager-pro/
 Tags: file manager, wordpress file manager, wp file manager, ftp, download plugin
 Requires at least: 3.0
 Tested up to: 7.1
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -116,6 +116,11 @@ Otherwise, feel free to [chat or email us](https://ninjateam.org/support/).
 4. Top free file manager plugins comparison chart
 
 == Changelog ==
+
+= Oct 26, 2026 - Version 2.1.5 =
+– Fixed: A Multisite privilege escalation where a subsite Administrator could allow unsafe file types and run PHP files on the site. Reported by Michael Kim (seslo82).
+– Fixed: Hardened file path checks in the bundled elFinder file browser.
+– Fixed: Centered the loading spinner on the "Save Changes" buttons.
 
 = Sep 16, 2026 - Version 2.1.4 =
 - Improved: Recommendations layout
